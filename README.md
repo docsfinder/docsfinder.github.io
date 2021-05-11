@@ -1,16 +1,14 @@
-# docsfinder
+# Docs Finder App
 
-A new Flutter project.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Test](https://github.com/docsfinder/docsfinder.github.io/workflows/CI/badge.svg)](https://github.com/docsfinder/docsfinder.github.io/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/docsfinder/docsfinder.github.io/branch/main/graph/badge.svg?token=Z1MEEL3EAB)](https://codecov.io/gh/docsfinder/docsfinder.github.io)
+[![Last commit](https://img.shields.io/github/last-commit/docsfinder/docsfinder.github.io.svg?style=flat)](https://github.com/docsfinder/docsfinder.github.io/commits)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/docsfinder/docsfinder.github.io)](https://github.com/docsfinder/docsfinder.github.io/commits)
+[![Github Stars](https://img.shields.io/github/stars/docsfinder/docsfinder.github.io?style=flat&logo=github)](https://github.com/docsfinder/docsfinder.github.io/stargazers)
+[![Github Forks](https://img.shields.io/github/forks/docsfinder/docsfinder.github.io?style=flat&logo=github)](https://github.com/docsfinder/docsfinder.github.io/network/members)
+[![Github Watchers](https://img.shields.io/github/watchers/docsfinder/docsfinder.github.io?style=flat&logo=github)](https://github.com/docsfinder/docsfinder.github.io)
+[![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Fdocsfinder.github.io)](https://docsfinder.github.io)
+[![GitHub contributors](https://img.shields.io/github/contributors/docsfinder/docsfinder.github.io)](https://github.com/docsfinder/docsfinder.github.io/graphs/contributors)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Open source documents finder.

@@ -1,3 +1,4 @@
+import 'package:docsfinder/src/core/core.dart';
 import 'package:flutter/material.dart';
 
 class InputWidget extends StatelessWidget {
@@ -13,17 +14,20 @@ class InputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 10,
+      margin: const EdgeInsets.only(
+        left: 30,
+        right: 30,
+        top: 10,
+        bottom: 10,
       ),
       child: TextField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(15),
             ),
           ),
+          hintText: LocaleKeys.input_hint.tr(),
         ),
         controller: controller,
         onSubmitted: onSubmitted,

@@ -6,5 +6,6 @@ abstract class  LocaleKeys {
   static const errors_network_error = 'errors.network_error';
   static const errors_server_error = 'errors.server_error';
   static const errors = 'errors';
+  static const input_hint = 'input_hint';
 
 }
