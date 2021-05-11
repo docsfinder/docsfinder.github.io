@@ -10,9 +10,8 @@ import 'package:get_it/get_it.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          GetIt.I.get<IThemingBloc>()..add(const ThemingEvent.started()),
+    return BlocProvider<IThemingBloc>(
+      create: (context) => GetIt.I()..add(const ThemingEvent.started()),
       child: BlocBuilder<IThemingBloc, ThemingState>(
         builder: (context, state) {
           return GetMaterialApp(

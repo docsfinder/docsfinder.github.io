@@ -5,15 +5,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class HomePage extends StatelessWidget {
+  final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.I.get<IHomeBloc>(),
+    return BlocProvider<IHomeBloc>(
+      create: (context) => GetIt.I(),
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text(LocaleKeys.app_name.tr()),
+            title: BlocBuilder<IHomeBloc, HomeState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  initial: () => const Text(''),
+                  orElse: () => Text(LocaleKeys.app_name.tr()),
+                );
+              },
+            ),
             centerTitle: true,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
           ),
           drawer: Drawer(
             child: Stack(
@@ -68,34 +79,105 @@ class HomePage extends StatelessWidget {
             ),
           ),
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('You have pushed the button this many times:'),
-                BlocBuilder<IHomeBloc, HomeState>(
-                  builder: (context, state) {
-                    return Text(
-                      state.counter.toString(),
-                      style: Theme.of(context).textTheme.headline4,
+            child: BlocBuilder<IHomeBloc, HomeState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () {
+                    return Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(20),
+                          child: Text(
+                            LocaleKeys.app_name.tr(),
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ),
+                        InputWidget(
+                          controller: controller,
+                          onSubmitted: (_) => _action(context),
+                        ),
+                      ],
                     );
                   },
-                ),
-              ],
+                  loading: () {
+                    return Column(
+                      children: [
+                        InputWidget(
+                          controller: controller,
+                          onSubmitted: (_) => _action(context),
+                        ),
+                        const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                  success: (documents) {
+                    return Scrollbar(
+                      child: ListView(
+                        children: [
+                          InputWidget(
+                            controller: controller,
+                            onSubmitted: (_) => _action(context),
+                          ),
+                          for (var document in documents)
+                            Column(
+                              children: [
+                                ListTile(
+                                  title: SelectableText(document.title),
+                                  subtitle: SelectableText(document.content),
+                                  isThreeLine: true,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                  ),
+                                  child: const Divider(),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                  error: (message) {
+                    return Column(
+                      children: [
+                        InputWidget(
+                          controller: controller,
+                          onSubmitted: (_) => _action(context),
+                        ),
+                        Expanded(
+                          child: SelectableText(message),
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
             ),
           ),
-          floatingActionButton: Builder(
-            builder: (context) {
-              return FloatingActionButton(
-                onPressed: () {
-                  context.read<IHomeBloc>().add(const HomeEvent.incremented());
-                },
-                tooltip: 'Increment',
-                child: const Icon(Icons.add),
+          floatingActionButton: BlocBuilder<IHomeBloc, HomeState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                loading: () => const SizedBox(),
+                orElse: () => FloatingActionButton(
+                  onPressed: () {
+                    _action(context);
+                  },
+                  child: const Icon(Icons.search),
+                ),
               );
             },
           ),
         ),
       ),
     );
+  }
+
+  void _action(BuildContext context) {
+    context.read<IHomeBloc>().add(HomeEvent.find(controller.text.trim()));
   }
 }

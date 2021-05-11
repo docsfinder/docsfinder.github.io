@@ -15,7 +15,12 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> en = {
-  "app_name": "Docs Finder"
+  "app_name": "Docs Finder",
+  "errors": {
+    "unknow_error": "An unknown and unexpected error has occurred.",
+    "network_error": "Please, check your internet connection and try again.",
+    "server_error": "Sorry, but seems like there’s a problem."
+  }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};
 }
