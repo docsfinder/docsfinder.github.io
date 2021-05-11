@@ -1,7 +1,7 @@
 # Docs Finder App
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Test](https://github.com/docsfinder/docsfinder.github.io/workflows/CI/badge.svg)](https://github.com/docsfinder/docsfinder.github.io/actions?query=workflow%3ACI)
+[![Deploy](https://github.com/docsfinder/docsfinder.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/docsfinder/docsfinder.github.io/actions/workflows/deploy.yml)
 [![codecov](https://codecov.io/gh/docsfinder/docsfinder.github.io/branch/main/graph/badge.svg?token=Z1MEEL3EAB)](https://codecov.io/gh/docsfinder/docsfinder.github.io)
 [![Last commit](https://img.shields.io/github/last-commit/docsfinder/docsfinder.github.io.svg?style=flat)](https://github.com/docsfinder/docsfinder.github.io/commits)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/docsfinder/docsfinder.github.io)](https://github.com/docsfinder/docsfinder.github.io/commits)
