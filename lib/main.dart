@@ -1,4 +1,6 @@
 import 'package:docsfinder/src/app.dart';
+import 'package:docsfinder/src/core/configurations/configure_nonweb.dart'
+    if (dart.library.html) 'package:docsfinder/src/core/configurations/configure_web.dart';
 import 'package:docsfinder/src/core/core.dart';
 import 'package:docsfinder/src/dependencies.dart';
 import 'package:docsfinder/src/domain/domain.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  configureApp();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DependencyInjection.init();
   await EasyLocalization.ensureInitialized();
