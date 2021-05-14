@@ -11,6 +11,7 @@ class DocumentModel {
   final String title;
   final String? author;
   final String content;
+  final int index;
 
   const DocumentModel({
     required this.id,
@@ -19,6 +20,7 @@ class DocumentModel {
     required this.title,
     required this.author,
     required this.content,
+    required this.index,
   });
 
   static DocumentModel fromJson(Map<String, dynamic> json) =>

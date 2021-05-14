@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:docsfinder/src/core/core.dart';
+import 'package:docsfinder/src/domain/domain.dart';
 import 'package:docsfinder/src/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,6 +136,27 @@ class HomePage extends StatelessWidget {
                             controller: controller,
                             onSubmitted: (_) => _action(context),
                           ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 35,
+                                vertical: 5,
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .read<IHomeBloc>()
+                                      .add(HomeEvent.enableFeedback(documents));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                child: Text(LocaleKeys.enable_feedback.tr()),
+                              ),
+                            ),
+                          ),
                           for (var document in documents)
                             Container(
                               margin: const EdgeInsets.symmetric(
@@ -171,6 +195,73 @@ class HomePage extends StatelessWidget {
                       ],
                     );
                   },
+                  successWithMultiselect: (docs, cs) {
+                    return Scrollbar(
+                      child: ListView(
+                        children: [
+                          InputWidget(
+                            controller: controller,
+                            onSubmitted: (_) =>
+                                _actionWithFeedback(context, docs, cs),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 35,
+                                vertical: 5,
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .read<IHomeBloc>()
+                                      .add(HomeEvent.disableFeedback(docs));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                child: Text(LocaleKeys.disable_feedback.tr()),
+                              ),
+                            ),
+                          ),
+                          for (var i = 0; i < min(docs.length, cs.length); ++i)
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 15,
+                              ),
+                              child: Column(
+                                children: [
+                                  CheckboxListTile(
+                                    title: SelectableText(docs[i].title),
+                                    subtitle: SelectableText(docs[i].content),
+                                    isThreeLine: true,
+                                    value: cs[i],
+                                    onChanged: (bool? value) {
+                                      if (value != null) {
+                                        context
+                                            .read<IHomeBloc>()
+                                            .add(HomeEvent.changeOption(
+                                              docs,
+                                              cs,
+                                              i,
+                                            ));
+                                      }
+                                    },
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                    ),
+                                    child: const Divider(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ),
+                    );
+                  },
                 );
               },
             ),
@@ -179,6 +270,12 @@ class HomePage extends StatelessWidget {
             builder: (context, state) {
               return state.maybeWhen(
                 loading: () => const SizedBox(),
+                successWithMultiselect: (docs, actives) => FloatingActionButton(
+                  onPressed: () {
+                    _actionWithFeedback(context, docs, actives);
+                  },
+                  child: const Icon(Icons.search),
+                ),
                 orElse: () => FloatingActionButton(
                   onPressed: () {
                     _action(context);
@@ -195,6 +292,15 @@ class HomePage extends StatelessWidget {
 
   void _action(BuildContext context) {
     context.read<IHomeBloc>().add(HomeEvent.find(controller.text.trim()));
+  }
+
+  void _actionWithFeedback(
+    BuildContext context,
+    List<DocumentModel> documents,
+    List<bool> actives,
+  ) {
+    context.read<IHomeBloc>().add(
+        HomeEvent.findWithFeedback(controller.text.trim(), documents, actives));
   }
 }
 

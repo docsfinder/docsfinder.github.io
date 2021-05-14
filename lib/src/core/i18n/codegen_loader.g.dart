@@ -21,7 +21,9 @@ class CodegenLoader extends AssetLoader{
     "network_error": "Please, check your internet connection and try again.",
     "server_error": "Sorry, but seems like there’s a problem."
   },
-  "input_hint": "Enter what you want to search"
+  "input_hint": "Enter what you want to search",
+  "enable_feedback": "Enable Feedback",
+  "disable_feedback": "Disable Feedback"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};
 }

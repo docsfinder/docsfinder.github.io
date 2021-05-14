@@ -24,4 +24,24 @@ class API {
     final result = await tryParse(parser);
     return result;
   }
+
+  static Future<List<DocumentModel>> getDocumentsWithFeedback({
+    required String query,
+    required List<int> goodFeedback,
+    required List<int> badFeedback,
+    required http.Client? client,
+  }) async {
+    final data = await Request.get(
+      'api/v1/query-with-feedback',
+      client: client,
+      queryParameters: {
+        'query': query,
+        for (var item in goodFeedback) 'good_feedback': item.toString(),
+        for (var item in badFeedback) 'bad_feedback': item.toString(),
+      },
+    );
+    final parser = () => parseList(data.body, DocumentModel.fromJson);
+    final result = await tryParse(parser);
+    return result;
+  }
 }

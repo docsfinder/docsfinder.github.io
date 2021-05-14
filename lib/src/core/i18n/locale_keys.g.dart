@@ -7,5 +7,7 @@ abstract class  LocaleKeys {
   static const errors_server_error = 'errors.server_error';
   static const errors = 'errors';
   static const input_hint = 'input_hint';
+  static const enable_feedback = 'enable_feedback';
+  static const disable_feedback = 'disable_feedback';
 
 }

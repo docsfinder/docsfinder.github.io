@@ -14,6 +14,7 @@ DocumentModel _$DocumentModelFromJson(Map<String, dynamic> json) {
     title: json['title'] as String,
     author: json['author'] as String?,
     content: json['content'] as String,
+    index: json['index'] as int,
   );
 }
 
@@ -25,4 +26,5 @@ Map<String, dynamic> _$DocumentModelToJson(DocumentModel instance) =>
       'title': instance.title,
       'author': instance.author,
       'content': instance.content,
+      'index': instance.index,
     };
