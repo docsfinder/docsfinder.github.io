@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:docsfinder/src/core/core.dart';
+import 'package:docsfinder/src/core/open_url.dart';
 import 'package:docsfinder/src/domain/domain.dart';
 import 'package:docsfinder/src/presentation/presentation.dart';
 import 'package:flutter/material.dart';
@@ -41,14 +42,70 @@ class HomePage extends StatelessWidget {
           drawer: Drawer(
             child: Stack(
               children: [
-                ListView(
+                Column(
                   children: [
-                    DrawerHeader(
-                      child: Center(
-                        child: Text(
-                          LocaleKeys.app_name.tr(),
-                          style: Theme.of(context).textTheme.headline4,
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          DrawerHeader(
+                            child: Center(
+                              child: Text(
+                                LocaleKeys.app_name.tr(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4!
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.link),
+                            onTap: () =>
+                                openUrl('https://docsfinder.herokuapp.com'),
+                            title: Text(
+                              LocaleKeys.api_specs.tr(),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.link),
+                            onTap: () => openUrl(
+                                'https://github.com/docsfinder/docsfinder'),
+                            title: Text(
+                              LocaleKeys.api_source_code.tr(),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.link),
+                            onTap: () => openUrl(
+                                'https://github.com/docsfinder/docsfinder.github.io'),
+                            title: Text(
+                              LocaleKeys.app_source_code.tr(),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(5),
+                      child: Text(
+                        LocaleKeys.copyright.tr(),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],

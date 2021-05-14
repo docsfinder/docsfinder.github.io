@@ -9,5 +9,9 @@ abstract class  LocaleKeys {
   static const input_hint = 'input_hint';
   static const enable_feedback = 'enable_feedback';
   static const disable_feedback = 'disable_feedback';
+  static const copyright = 'copyright';
+  static const api_specs = 'api_specs';
+  static const api_source_code = 'api_source_code';
+  static const app_source_code = 'app_source_code';
 
 }

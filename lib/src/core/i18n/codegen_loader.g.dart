@@ -23,7 +23,11 @@ class CodegenLoader extends AssetLoader{
   },
   "input_hint": "Enter what you want to search",
   "enable_feedback": "Enable Feedback",
-  "disable_feedback": "Disable Feedback"
+  "disable_feedback": "Disable Feedback",
+  "copyright": "Made with ♥️ by\nLeynier Gutiérrez & Carlos Bermudez",
+  "api_specs": "API specifications",
+  "api_source_code": "API source code",
+  "app_source_code": "APP source code"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};
 }
